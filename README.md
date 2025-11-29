@@ -1,5 +1,11 @@
 # get_next_line – Reading a File Line by Line 📄✨
 
+<div align="center">
+
+<a href="https://github.com/elbarry42/libft">![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/libftm.png)</a>
+
+</div>
+
 Welcome to **get_next_line**! 🎉
 This project is part of my journey at **42 Lyon**, and its goal is to implement a function in C that reads a file **one line at a time**, no matter the buffer size.
 
