@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<a href="https://github.com/elbarry42/get_next_line">![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/get_next_linee.png)</a>
+<a href="https://github.com/elbarry42/get_next_line">![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/get_next_linem.png)</a>
 
 </div>
 
