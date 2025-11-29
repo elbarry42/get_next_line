@@ -6,8 +6,7 @@
 
 </div>
 
-Welcome to **get_next_line**! 🎉
-This project is part of my journey at **42 Lyon**, and its goal is to implement a function in C that reads a file **one line at a time**, no matter the buffer size.
+Welcome to **get_next_line**! 🎉  Its goal is to implement a function in C that reads a file **one line at a time**, no matter the buffer size.
 
 It’s a key step in learning how to manage memory properly, handle static variables, and work efficiently with low-level file operations.
 
