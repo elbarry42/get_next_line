@@ -6,7 +6,7 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:12:58 by elbarry           #+#    #+#             */
-/*   Updated: 2025/11/30 21:04:50 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/05 22:29:01 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,15 @@ char	*ft_strdup(const char *s)
 		result[i] = s[i];
 		i++;
 	}
+	result[i] = '\0';
 	return (result);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -90,7 +91,7 @@ char	*ft_substr(char *s, size_t start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
-	sub = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
 	i = 0;
