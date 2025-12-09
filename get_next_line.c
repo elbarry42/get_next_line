@@ -6,7 +6,7 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:12:38 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/05 22:38:58 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/09 17:53:18 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@ size_t	ft_strlen(const char *s)
 }
 static char	*read_into_stash(int fd, char *stash)
 {
+	char	*buf;
+	size_t	BUFFER_SIZE;
 	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
 }
 
 static char	*extract_line(char *stash)
