@@ -6,7 +6,7 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 14:12:38 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/13 04:04:52 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/15 16:33:45 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ static char	*update_stash(char *stash)
 	i++;
 	new_stash = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!new_stash)
+	{
+		free(stash);
 		return (NULL);
+	}
 	j = 0;
 	while (stash[i])
 		new_stash[j++] = stash[i++];
@@ -116,19 +119,4 @@ char	*get_next_line(int fd)
 	line = extract_line(stash);
 	stash = update_stash(stash);
 	return (line);
-}
-
-#include <stdio.h>
-int main(void)
-{
-    int   fd = open("file.txt", O_RDONLY);
-    char *line;
-
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line);
-        free(line);
-    }
-    close(fd);
-    return (0);
 }
