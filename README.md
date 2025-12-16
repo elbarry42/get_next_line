@@ -1,141 +1,203 @@
-##get_next_line – Reading a File Line by Line 📄✨
+*This project has been created as part of the 42 curriculum by elbarry.*
 
+# get_next_line – Reading a File Line by Line 📄✨
 
 <div align="center">
 
-<a>![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/get_next_linem.png)</a>
+![42 Badge](https://github.com/elbarry42/elbarry42/blob/main/42_badges/get_next_linem.png)
 
 </div>
 
-*This project has been created as part of the 42 curriculum by elbarry.* 
+Welcome to **get_next_line**! 🎉
+This project consists of implementing a C function capable of reading a file **line by line** from a file descriptor, regardless of the buffer size.
 
-Welcome to **get_next_line**! 🎉 The goal of this project is to program a function that returns a line read from a file descriptor. It is a key step in learning memory management and the important concept of **static variables** in C programming. 
-
----
-
-##📝 Description
-`get_next_line` is a function designed to read text from a file descriptor (fd) one line at a time. Whether reading from a regular file or from standard input, the function returns the line that was read, including the terminating `\n` character (except if the end of file is reached without a newline). 
-
-**Key Goals:** 
-
-* Implement a robust solution for reading data chunks using a buffer.
-* Master the use of **static variables** to preserve data between function calls. 
-
-
-* Manage dynamic memory allocation (`malloc`/`free`) without leaks. 
-
-
-* Adhere to the strict coding standards of **The Norm**. 
-
-
+It is a core project of the **42 curriculum**, designed to strengthen your understanding of memory management, static variables, and low-level file I/O.
 
 ---
 
-##⚙️ How It Works (Algorithm)
-The function uses a buffer of size `BUFFER_SIZE` to read from the file descriptor. 
+## 📝 Description
 
-1. **Read & Accumulate:** It calls `read()` to get data and appends it to a static variable until a newline character (`\n`) is found or the end of the file is reached. 
+The goal of **get_next_line** is to write a function that returns a single line from a file descriptor each time it is called.
 
+The returned line:
 
-2. **Extract Line:** Once a newline is found, the function extracts the string up to the `\n` to return it. 
+* Includes the terminating `\n` character if present
+* Is dynamically allocated
+* Returns `NULL` when there is nothing left to read or when an error occurs
 
+This project focuses on:
 
-3. **Save Remainder:** Any data read *after* the newline is kept in the **static variable** so it can be processed during the next call to `get_next_line`. 
-
-
-4. **Cleanup:** If an error occurs or there is nothing left to read, the function returns `NULL`. 
-
-
-
----
-
-##📚 Project Structure
-Mandatory Part 
-
-* `get_next_line.c`: Main logic.
-* `get_next_line_utils.c`: Helper functions needed for the implementation. 
-
-
-* `get_next_line.h`: Header file containing the prototype. 
-
-
-
-Bonus Part 
-The bonus files include the suffix `_bonus`:
-
-* `get_next_line_bonus.c`
-* `get_next_line_bonus.h`
-* `get_next_line_utils_bonus.c`
+* Proper use of **static variables**
+* Safe and efficient **memory allocation and deallocation**
+* Handling unpredictable input sizes
+* Writing clean, modular, and norm-compliant C code
 
 ---
 
-##🔧 Function Prototype
+## ⚙️ Function Prototype
 
 ```c
 char *get_next_line(int fd);
-
 ```
 
-| Component | Description |
-| --- | --- |
-| **Prototype** | <br>`char *get_next_line(int fd);` 
+### Parameters
 
- |
-| **Parameters** | <br>`fd`: The file descriptor to read from. 
+* **fd**: file descriptor to read from
 
- |
-| **Return Value** | The read line (correct behavior) or `NULL` (nothing left to read or error). 
+### Return Value
 
- |
-| **External Functions** | <br>`read`, `malloc`, `free`. 
-
- |
+* A string containing the next line read
+* `NULL` if the end of file is reached or an error occurs
 
 ---
 
-##🛠️ Instructions (Compilation)
+## ⚙️ How It Works
 
-The project must be compiled with the `-D BUFFER_SIZE=n` flag to define the buffer size for `read()`. 
+Each call to `get_next_line(fd)`:
+
+1. Reads data from `fd` using `read()` with a buffer of size `BUFFER_SIZE`
+2. Stores data until a `\n` is found
+3. Extracts and returns the line
+4. Keeps the remaining data in a **static variable** for the next call
+
+The function must:
+
+* Work with files and standard input
+* Handle very small and very large `BUFFER_SIZE` values
+* Read as little as possible on each call
+
+---
+
+## 📁 Project Structure
+
+### Mandatory Part
+
+```
+get_next_line.c
+get_next_line_utils.c
+get_next_line.h
+```
+
+* Helper functions must be placed in `get_next_line_utils.c`
+* The header file must contain at least the function prototype
+
+### Bonus Part
+
+```
+get_next_line_bonus.c
+get_next_line_utils_bonus.c
+get_next_line_bonus.h
+```
+
+---
+
+## 🛠️ Compilation
+
+The project must compile with or without a defined buffer size:
 
 ```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
-
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 *.c
 ```
 
-> [!IMPORTANT]
-> The code must compile with and without the `-D BUFFER_SIZE` flag. It must also handle various buffer sizes, from 1 to 10,000,000. 
-> 
-> 
+You may choose any default value for `BUFFER_SIZE`.
 
 ---
 
-##⭐ Bonus Features
+## 🧪 Example Usage
 
-The bonus part is evaluated only if the mandatory part is perfect.  It requires:
+```c
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-1. **Single Static Variable:** Using only one static variable to manage the state. 
+int main(void)
+{
+    int fd = open("file.txt", O_RDONLY);
+    char *line;
 
-
-2. **Multiple File Descriptors:** The ability to manage multiple file descriptors at the same time (e.g., reading from fd 3, then 4, then 5, then back to 3) without losing the reading state of any of them. 
-
-
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return (0);
+}
+```
 
 ---
 
-##📖 Resources
-**Classic References:**
+## 🚫 Forbidden
 
-* C Programming: Static Variables.
-* File Descriptors and the `read()` function.
-* Memory management in C.
+* Using **libft**
+* Using `lseek()`
+* Using **global variables**
+
+Undefined behavior includes:
+
+* Reading from modified files before reaching EOF
+* Reading binary files
 
 ---
 
-##🚀 Learning Outcomes* 
-**Foundational Tech:** Deep understanding of file I/O and memory allocation. 
+## ⭐ Bonus Requirements
 
+The bonus part must:
 
-* **Problem Solving:** Developed the ability to find solutions through reasoning rather than shortcuts. 
+* Use **only one static variable**
+* Handle **multiple file descriptors simultaneously**
 
+Example:
 
-* **Peer Learning:** Exchanging ideas with peers to improve divergent thinking and interpersonal skills. 
+```
+get_next_line(fd3)
+get_next_line(fd4)
+get_next_line(fd5)
+get_next_line(fd3)
+```
+
+Each file descriptor must keep its own reading state.
+
+⚠️ The bonus part is evaluated **only if the mandatory part is perfect**.
+
+---
+
+## 🧠 Algorithm Explanation
+
+The algorithm is based on:
+
+* A static buffer to store leftover data
+* Repeated reads until a newline is found or EOF is reached
+* Splitting the buffer into:
+
+  * The line to return
+  * The remaining content for the next call
+
+This approach ensures:
+
+* Minimal reads
+* No data loss
+* Correct handling of partial lines
+
+---
+
+## 📚 Resources
+
+* Linux `read()` manual
+* Static variables in C
+* File descriptors and low-level I/O
+* Wikipedia: Static variable
+
+---
+
+## 📦 Submission
+
+* All required files must be present in the Git repository
+* File names must be exact
+* Only repository content is evaluated during defense
+
+After validation, this function can be added to **libft**.
+
+---
+
+✨ Thanks for checking out my **get_next_line** project! 🚀
