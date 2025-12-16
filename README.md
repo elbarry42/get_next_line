@@ -1,4 +1,4 @@
-#get_next_line – Reading a File Line by Line 📄✨
+##get_next_line – Reading a File Line by Line 📄✨
 
 
 <div align="center">
@@ -53,12 +53,10 @@ The function uses a buffer of size `BUFFER_SIZE` to read from the file descripto
 Mandatory Part 
 
 * `get_next_line.c`: Main logic.
-* 
-`get_next_line_utils.c`: Helper functions needed for the implementation. 
+* `get_next_line_utils.c`: Helper functions needed for the implementation. 
 
 
-* 
-`get_next_line.h`: Header file containing the prototype. 
+* `get_next_line.h`: Header file containing the prototype. 
 
 
 
@@ -137,9 +135,7 @@ The bonus part is evaluated only if the mandatory part is perfect.  It requires:
 **Foundational Tech:** Deep understanding of file I/O and memory allocation. 
 
 
-* 
-**Problem Solving:** Developed the ability to find solutions through reasoning rather than shortcuts. 
+* **Problem Solving:** Developed the ability to find solutions through reasoning rather than shortcuts. 
 
 
-* 
-**Peer Learning:** Exchanging ideas with peers to improve divergent thinking and interpersonal skills. 
+* **Peer Learning:** Exchanging ideas with peers to improve divergent thinking and interpersonal skills. 
