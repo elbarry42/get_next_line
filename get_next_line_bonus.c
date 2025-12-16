@@ -6,7 +6,7 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:28:09 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/15 17:24:56 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/16 17:05:33 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,26 @@ static char	*read_into_stash(int fd, char *stash)
 	char	*buf;
 	ssize_t	bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
+	{
+		free(stash);
 		return (NULL);
+	}
 	bytes_read = 1;
-	while (!ft_strchr(stash, '\n') && bytes_read > 0)
+	while ((stash == NULL || !ft_strchr(stash, '\n')) && bytes_read > 0)
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
 			free(buf);
+			free(stash);
 			return (NULL);
 		}
 		buf[bytes_read] = '\0';
 		stash = ft_strjoin_free(stash, buf);
-		if (!stash)
-			break ;
 	}
-	free (buf);
+	free(buf);
 	return (stash);
 }
 
@@ -118,6 +118,12 @@ char	*get_next_line(int fd)
 	if (!stash[fd])
 		return (NULL);
 	line = extract_line(stash[fd]);
+	if (!line)
+	{
+		free(stash[fd]);
+		stash[fd] = NULL;
+		return (NULL);
+	}
 	stash[fd] = update_stash(stash[fd]);
 	return (line);
 }
