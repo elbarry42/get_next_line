@@ -6,7 +6,7 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:28:30 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/16 15:17:44 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/17 15:24:13 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_free(char *s1, char *s2);
-char	*ft_substr(char *s, size_t start, size_t len);
 char	*get_next_line(int fd);
 
 #endif
