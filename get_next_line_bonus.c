@@ -6,23 +6,11 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:28:09 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/16 17:05:33 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/17 12:05:11 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 static char	*read_into_stash(int fd, char *stash)
 {

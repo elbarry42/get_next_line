@@ -6,11 +6,23 @@
 /*   By: elbarry <elbarry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:27:41 by elbarry           #+#    #+#             */
-/*   Updated: 2025/12/16 16:19:37 by elbarry          ###   ########.fr       */
+/*   Updated: 2025/12/17 12:00:36 by elbarry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -80,28 +92,4 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	result = ft_strjoin(s1, s2);
 	free(s1);
 	return (result);
-}
-
-char	*ft_substr(char *s, size_t start, size_t len)
-{
-	size_t	i;
-	char	*sub;
-
-	if (!s)
-		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	sub = malloc(sizeof(char) * (len + 1));
-	if (!sub)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		sub[i] = s[start + i];
-		i++;
-	}
-	sub[i] = '\0';
-	return (sub);
 }
