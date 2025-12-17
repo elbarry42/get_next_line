@@ -188,6 +188,11 @@ This approach ensures:
 * File descriptors and low-level I/O
 * Wikipedia: Static variable
 
+### 🤖 AI Usage
+
+AI tools were used **only for documentation assistance and README structuring**.
+All algorithm design, logic, and code implementation were done manually, in accordance with the **42 AI policy**.
+
 ---
 
 ## 📦 Submission
